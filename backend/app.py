@@ -1,15 +1,20 @@
 from flask import Flask, request, jsonify
 from sklearn.externals import joblib
+from flask_cors import CORS, cross_origin
 
 HOST = "0.0.0.0"
 PORT = 8080
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/api/predict', methods=['GET', 'POST'])
+@cross_origin()
 def predict():
-	input_text = "I hope this works"
+	request_data = request.json
+	input_text = request_data['input']
 	vectorizer = joblib.load('vectorizer.pkl')
 	classifier = joblib.load('model.pkl')
 	
@@ -17,11 +22,11 @@ def predict():
 
 	prediction_rbf = classifier.predict(tokenized_input)
 	priediction_proba = classifier.predict_proba(tokenized_input)
-	qwe = zip(classifier.classes_, priediction_proba[0]) #shows all propabilities
-	asd = {k:v for k,v in qwe}
-	asd['feeling'] = prediction_rbf[0]
+	probabilities = zip(classifier.classes_, priediction_proba[0]) #shows all propabilities
+	response = {k:v for k,v in probabilities}
+	response['feeling'] = prediction_rbf[0]
 
-	return jsonify({'response':asd})
+	return jsonify({'response':response})
 
 if __name__ == "__main__":
 	app.run(host=HOST, port=PORT, debug=True)

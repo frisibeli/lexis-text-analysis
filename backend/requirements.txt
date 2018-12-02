@@ -1,2 +1,3 @@
 flask
 scikit-learn[alldeps]
+flask-cors
