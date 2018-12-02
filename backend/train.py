@@ -1,7 +1,9 @@
 from os import path, listdir
 import sys
 from sklearn import svm
+import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.externals import joblib
 
 DATA_DIR = 'dataset'
 classes = ['anger', 'fear', 'sadness', 'surprise', 'happiness', 'neutral', 'disgust']
@@ -40,19 +42,23 @@ def main():
 
 	vectorizer.fit(train_data+test_data)
 
+	joblib.dump(vectorizer, 'vectorizer.pkl')
+
 	vectorized_train_data = vectorizer.transform(train_data)
 	vectorized_test_data = vectorizer.transform(test_data)
 
 	classifier = svm.SVC(kernel='linear', C=10, probability=True, verbose=1)
 	classifier.fit(vectorized_train_data, train_labels)
 
-	while True:
-		var = input("Please enter something: ")
-		our_test = vectorizer.transform([var])
-		prediction_rbf = classifier.predict(our_test)
-		priediction_proba = classifier.predict_proba(our_test)
-		print(zip(classifier.classes_, priediction_proba[0])) #shows all propabilities
-		print(prediction_rbf) #shows determined label
+	joblib.dump(classifier, 'model.pkl')
+		
+	# while True:
+	# 	var = input("Please enter something: ")
+	# 	our_test = vectorizer.transform([var])
+	# 	prediction_rbf = classifier.predict(our_test)
+	# 	priediction_proba = classifier.predict_proba(our_test)
+	# 	print(zip(classifier.classes_, priediction_proba[0])) #shows all propabilities
+	# 	print(prediction_rbf) #shows determined label
 
 
 if __name__ == "__main__":
