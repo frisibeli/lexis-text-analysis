@@ -13,7 +13,7 @@ The code in this repository is "cleaner" and refactored version of what we prese
 Make sure you have Python3, virtualenv and NodeJS installed on your system. 
 
 #### Clone the repository
-
+ 
 ```
 git clone https://github.com/frisibeli/lexis-text-analysis.git
 ```
