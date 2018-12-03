@@ -1,6 +1,12 @@
 # Lexis - emotion detection in text
 
-Lexis is web based application that analyzes given user text input using SVM and shows the emotion(s) in the text. The model is trained on more than 75k tweets, seperated in six categories, based on their hashtag: anger, disgust, fear, happiness, irony, neutral, sadness, sarcasm, surprise. 
+Lexis is web based application that analyzes given user text input using SVM and shows the emotion(s) in the text. The model is trained on more than 75k tweets, seperated in six categories, based on their hashtag: anger, disgust, fear, happiness, irony, neutral, sadness, sarcasm, surprise.
+
+#### Hackathon winning project
+
+![Demo](images/winners.jpg)
+Lexis was created at a hackathon (HackFMI 8 - hack for data) by me and 5 other university coleagues.
+The code in this repository is "cleaner" and refactored version of what we presented (the original repository can be seen [here](https://github.com/emil-kirilov/lexis)). Also here I am using React for UI.
 
 ## Getting Started
 
